@@ -1,7 +1,9 @@
 package com.windj0y.hw004.dao;
 
 import com.windj0y.hw004.pojo.*;
+import config.MainConfig;
 import jdbc.MysqlAdapter;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -11,12 +13,19 @@ import java.util.List;
 @Repository
 public class MainDaoImpl implements MainDao {
 
+    private final MysqlAdapter mysqlAdapter;
+
+    public MainDaoImpl() {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(MainConfig.class);
+        mysqlAdapter = (MysqlAdapter)context.getBean("mysqlAdapter");
+    }
+
     @Override
     public boolean addStudent(String name) {
         if(name == null || name.isEmpty()) return false;
 
         String sqlString = "insert into student (name) VALUES (?)";
-        Connection connection = MysqlAdapter.getConnection();
+        Connection connection = mysqlAdapter.getConnection();
 
         try (PreparedStatement statement = connection.prepareStatement(sqlString)){
             statement.setString(1,name);
@@ -35,7 +44,7 @@ public class MainDaoImpl implements MainDao {
         if(name == null || name.isEmpty()) return false;
 
         String sqlString = "insert into homework (name) VALUES (?)";
-        Connection connection = MysqlAdapter.getConnection();
+        Connection connection = mysqlAdapter.getConnection();
 
         try (PreparedStatement statement = connection.prepareStatement(sqlString)){
             statement.setString(1,name);
@@ -54,7 +63,7 @@ public class MainDaoImpl implements MainDao {
         if(content == null || content.isEmpty()) return false;
 
         String sqlString = "insert into submit (sid,hid,content) VALUES (?,?,?)";
-        Connection connection = MysqlAdapter.getConnection();
+        Connection connection = mysqlAdapter.getConnection();
 
         try (PreparedStatement statement = connection.prepareStatement(sqlString)){
             statement.setInt(1,sid);
@@ -75,7 +84,7 @@ public class MainDaoImpl implements MainDao {
         List<Student> rtn = new ArrayList<>();
 
         String sqlString = "select * from student";
-        Connection connection = MysqlAdapter.getConnection();
+        Connection connection = mysqlAdapter.getConnection();
 
         try (Statement statement = connection.createStatement()){
             ResultSet resultSet = statement.executeQuery(sqlString);
@@ -99,7 +108,7 @@ public class MainDaoImpl implements MainDao {
         List<Homework> rtn = new ArrayList<>();
 
         String sqlString = "select * from homework";
-        Connection connection = MysqlAdapter.getConnection();
+        Connection connection = mysqlAdapter.getConnection();
 
         try (Statement statement = connection.createStatement()){
             ResultSet resultSet = statement.executeQuery(sqlString);
@@ -123,7 +132,7 @@ public class MainDaoImpl implements MainDao {
         List<Submit> rtn = new ArrayList<>();
 
         String sqlString = "select * from submit";
-        Connection connection = MysqlAdapter.getConnection();
+        Connection connection = mysqlAdapter.getConnection();
 
         try (Statement statement = connection.createStatement()){
             ResultSet resultSet = statement.executeQuery(sqlString);

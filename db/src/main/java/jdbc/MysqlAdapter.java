@@ -4,9 +4,9 @@ import java.sql.*;
 
 public class MysqlAdapter {
 
-    static boolean loaded = false;
+    private boolean loaded = false;
 
-    public static Connection getConnection(){
+    public Connection getConnection(){
 
         if(!loaded){
             synchronized (MysqlAdapter.class){
