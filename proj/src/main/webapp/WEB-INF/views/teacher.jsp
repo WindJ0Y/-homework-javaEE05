@@ -1,17 +1,21 @@
 <%@ page import="java.util.List" %>
-<%@ page import="bean.Student" %>
-<%@ page import="jdbc.MainBo" %>
-<%@ page import="bean.Homework" %>
-<%@ page import="bean.Submit" %>
+<%@ page import="com.windj0y.hw004.service.MainService" %>
+<%@ page import="com.windj0y.hw004.pojo.Student" %>
+<%@ page import="com.windj0y.hw004.pojo.Homework" %>
+<%@ page import="com.windj0y.hw004.pojo.Submit" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>教师页</title>
-    <link type="text/css" rel="styleSheet"  href="./css.css" />
-    <script type="text/javascript" src="./js.js"></script>
+    <link type="text/css" rel="styleSheet"  href="css/css.css" />
+    <script type="text/javascript" src="js/js.js"></script>
 </head>
 
 <body>
+
+<%
+    MainService mainService = (MainService)request.getAttribute("mainService");
+%>
 
 <div class = "parent">
 
@@ -30,7 +34,7 @@
                 <td>姓名</td>
             </tr>
             <%{
-                List<Student> list = MainBo.getStudents();
+                List<Student> list = mainService.getStudents();
                 for(Student student:list){%>
                     <tr>
                         <td><%=student.getSid() %></td>
@@ -57,7 +61,7 @@
                 <td>名称</td>
             </tr>
             <%{
-                List<Homework> list = MainBo.getHomeworks();
+                List<Homework> list = mainService.getHomeworks();
                 for(Homework homework:list){%>
                     <tr>
                         <td><%=homework.getHid() %></td>
@@ -79,7 +83,7 @@
                 <td>内容</td>
             </tr>
             <%{
-                List<Submit> list = MainBo.getSubmits();
+                List<Submit> list = mainService.getSubmits();
                 for(Submit submit:list){%>
             <tr>
                 <td><%=submit.getSid() %></td>

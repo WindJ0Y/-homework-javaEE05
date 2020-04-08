@@ -2,9 +2,9 @@
 <html>
 <body>
 
-<a href="teacher.jsp">教师页</a>
+<a href="teacher">教师页</a>
 <br>
-<a href="student.jsp">学生页</a>
+<a href="student">学生页</a>
 
 </body>
 </html>

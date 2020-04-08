@@ -1,16 +1,18 @@
-package jdbc;
+package com.windj0y.hw004.dao;
 
-import bean.Homework;
-import bean.Student;
-import bean.Submit;
+import com.windj0y.hw004.pojo.*;
+import jdbc.MysqlAdapter;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainBo {
+@Repository
+public class MainDaoImpl implements MainDao {
 
-    public static boolean addStudent(String name){
+    @Override
+    public boolean addStudent(String name) {
         if(name == null || name.isEmpty()) return false;
 
         String sqlString = "insert into student (name) VALUES (?)";
@@ -18,7 +20,9 @@ public class MainBo {
 
         try (PreparedStatement statement = connection.prepareStatement(sqlString)){
             statement.setString(1,name);
-            return statement.executeUpdate()==1;
+            boolean result = statement.executeUpdate() == 1;
+            connection.close();
+            return result;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -26,7 +30,8 @@ public class MainBo {
         return false;
     }
 
-    public static boolean addHomework(String name){
+    @Override
+    public boolean addHomework(String name) {
         if(name == null || name.isEmpty()) return false;
 
         String sqlString = "insert into homework (name) VALUES (?)";
@@ -34,7 +39,9 @@ public class MainBo {
 
         try (PreparedStatement statement = connection.prepareStatement(sqlString)){
             statement.setString(1,name);
-            return statement.executeUpdate()==1;
+            boolean result = statement.executeUpdate() == 1;
+            connection.close();
+            return result;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -42,17 +49,20 @@ public class MainBo {
         return false;
     }
 
-    public static boolean submitHomework(String sid, String hid, String content){
+    @Override
+    public boolean submitHomework(int sid, int hid, String content) {
         if(content == null || content.isEmpty()) return false;
 
         String sqlString = "insert into submit (sid,hid,content) VALUES (?,?,?)";
         Connection connection = MysqlAdapter.getConnection();
 
         try (PreparedStatement statement = connection.prepareStatement(sqlString)){
-            statement.setString(1,sid);
-            statement.setString(2,hid);
+            statement.setInt(1,sid);
+            statement.setInt(2,hid);
             statement.setString(3,content);
-            return statement.executeUpdate()==1;
+            boolean result = statement.executeUpdate() == 1;
+            connection.close();
+            return result;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -60,7 +70,8 @@ public class MainBo {
         return false;
     }
 
-    public static List<Student> getStudents(){
+    @Override
+    public List<Student> getStudents() {
         List<Student> rtn = new ArrayList<>();
 
         String sqlString = "select * from student";
@@ -75,7 +86,7 @@ public class MainBo {
                 tmpStudent.setName(resultSet.getString("name"));
                 rtn.add(tmpStudent);
             }
-
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -83,7 +94,8 @@ public class MainBo {
         return rtn;
     }
 
-    public static List<Homework> getHomeworks(){
+    @Override
+    public List<Homework> getHomeworks() {
         List<Homework> rtn = new ArrayList<>();
 
         String sqlString = "select * from homework";
@@ -98,7 +110,7 @@ public class MainBo {
                 tmpHomework.setName(resultSet.getString("name"));
                 rtn.add(tmpHomework);
             }
-
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -106,7 +118,8 @@ public class MainBo {
         return rtn;
     }
 
-    public static List<Submit> getSubmits(){
+    @Override
+    public List<Submit> getSubmits() {
         List<Submit> rtn = new ArrayList<>();
 
         String sqlString = "select * from submit";
@@ -122,12 +135,11 @@ public class MainBo {
                 tmpSubmit.setContent(resultSet.getString("content"));
                 rtn.add(tmpSubmit);
             }
-
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         return rtn;
     }
-
 }

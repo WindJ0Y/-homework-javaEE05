@@ -1,0 +1,33 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="unnamed">
+    <output-path>$PROJECT_DIR$/out/artifacts/unnamed</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="core" />
+          <element id="module-output" name="db" />
+          <element id="module-output" name="hw004" />
+          <element id="module-output" name="proj" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.6.1" />
+          <element id="library" level="project" name="Maven: com.zaxxer:HikariCP:3.4.2" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.19" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.25" />
+          <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:4.0.1" />
+          <element id="library" level="project" name="Maven: javax.servlet.jsp:javax.servlet.jsp-api:2.3.3" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-aop:5.2.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-beans:5.2.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context:5.2.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-core:5.2.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-expression:5.2.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-jcl:5.2.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-web:5.2.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:5.2.5.RELEASE" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="proj/web/Web" />
+      <element id="artifact" artifact-name="proj:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,4 +1,4 @@
-package bean;
+package com.windj0y.hw004.pojo;
 
 public class Submit {
     int sid;

@@ -5,14 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.windj0y</groupId>
-    <artifactId>hw003</artifactId>
+    <artifactId>hw004</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 
     <modules>
-        <module>proj</module>
         <module>core</module>
         <module>db</module>
+        <module>proj</module>
     </modules>
 
 

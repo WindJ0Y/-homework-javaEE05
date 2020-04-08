@@ -13,7 +13,7 @@ const Ajax = {
 
 addStudent = function () {
     let name = document.getElementById("studentName").value;
-    Ajax.get("./v1/addStudent?name=" + name,function (resp) {
+    Ajax.get("./v2/addStudent?name=" + name,function (resp) {
         alert(resp);
         location.reload();
     })
@@ -21,7 +21,7 @@ addStudent = function () {
 
 addHomework = function () {
     let name = document.getElementById("homeworkName").value;
-    Ajax.get("./v1/addHomework?name=" + name,function (resp) {
+    Ajax.get("./v2/addHomework?name=" + name,function (resp) {
         alert(resp);
         location.reload();
     })
@@ -31,7 +31,7 @@ submitHomework = function () {
     let sid = document.getElementById("studentSelect").value;
     let hid = document.getElementById("homeworkSelect").value;
     let content = document.getElementById("homeworkContent").value;
-    Ajax.get("./v1/submitHomework?sid=" + sid + "&hid=" + hid + "&content=" + content ,function (resp) {
+    Ajax.get("./v2/submitHomework?sid=" + sid + "&hid=" + hid + "&content=" + content ,function (resp) {
         alert(resp);
         location.reload();
     })
