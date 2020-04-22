@@ -28,12 +28,21 @@ public class MainDaoImpl implements MainDao {
         Connection connection = mysqlAdapter.getConnection();
 
         try (PreparedStatement statement = connection.prepareStatement(sqlString)){
+            connection.setAutoCommit(false);
             statement.setString(1,name);
             boolean result = statement.executeUpdate() == 1;
+            connection.commit();
             connection.close();
             return result;
         } catch (SQLException e) {
             e.printStackTrace();
+            try {
+                if(connection!=null){
+                    connection.rollback();
+                }
+            } catch (SQLException ee) {
+                System.out.println(ee);
+            }
         }
 
         return false;
@@ -47,12 +56,21 @@ public class MainDaoImpl implements MainDao {
         Connection connection = mysqlAdapter.getConnection();
 
         try (PreparedStatement statement = connection.prepareStatement(sqlString)){
+            connection.setAutoCommit(false);
             statement.setString(1,name);
             boolean result = statement.executeUpdate() == 1;
+            connection.commit();
             connection.close();
             return result;
         } catch (SQLException e) {
             e.printStackTrace();
+            try {
+                if(connection!=null){
+                    connection.rollback();
+                }
+            } catch (SQLException ee) {
+                System.out.println(ee);
+            }
         }
 
         return false;
@@ -66,14 +84,23 @@ public class MainDaoImpl implements MainDao {
         Connection connection = mysqlAdapter.getConnection();
 
         try (PreparedStatement statement = connection.prepareStatement(sqlString)){
+            connection.setAutoCommit(false);
             statement.setInt(1,sid);
             statement.setInt(2,hid);
             statement.setString(3,content);
             boolean result = statement.executeUpdate() == 1;
+            connection.commit();
             connection.close();
             return result;
         } catch (SQLException e) {
             e.printStackTrace();
+            try {
+                if(connection!=null){
+                    connection.rollback();
+                }
+            } catch (SQLException ee) {
+                System.out.println(ee);
+            }
         }
 
         return false;
@@ -87,6 +114,7 @@ public class MainDaoImpl implements MainDao {
         Connection connection = mysqlAdapter.getConnection();
 
         try (Statement statement = connection.createStatement()){
+            connection.setAutoCommit(false);
             ResultSet resultSet = statement.executeQuery(sqlString);
 
             while(resultSet.next()){
@@ -95,9 +123,17 @@ public class MainDaoImpl implements MainDao {
                 tmpStudent.setName(resultSet.getString("name"));
                 rtn.add(tmpStudent);
             }
+            connection.commit();
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
+            try {
+                if(connection!=null){
+                    connection.rollback();
+                }
+            } catch (SQLException ee) {
+                System.out.println(ee);
+            }
         }
 
         return rtn;
@@ -111,6 +147,7 @@ public class MainDaoImpl implements MainDao {
         Connection connection = mysqlAdapter.getConnection();
 
         try (Statement statement = connection.createStatement()){
+            connection.setAutoCommit(false);
             ResultSet resultSet = statement.executeQuery(sqlString);
 
             while(resultSet.next()){
@@ -119,9 +156,17 @@ public class MainDaoImpl implements MainDao {
                 tmpHomework.setName(resultSet.getString("name"));
                 rtn.add(tmpHomework);
             }
+            connection.commit();
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
+            try {
+                if(connection!=null){
+                    connection.rollback();
+                }
+            } catch (SQLException ee) {
+                System.out.println(ee);
+            }
         }
 
         return rtn;
@@ -135,6 +180,7 @@ public class MainDaoImpl implements MainDao {
         Connection connection = mysqlAdapter.getConnection();
 
         try (Statement statement = connection.createStatement()){
+            connection.setAutoCommit(false);
             ResultSet resultSet = statement.executeQuery(sqlString);
 
             while(resultSet.next()){
@@ -144,9 +190,17 @@ public class MainDaoImpl implements MainDao {
                 tmpSubmit.setContent(resultSet.getString("content"));
                 rtn.add(tmpSubmit);
             }
+            connection.commit();
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
+            try {
+                if(connection!=null){
+                    connection.rollback();
+                }
+            } catch (SQLException ee) {
+                System.out.println(ee);
+            }
         }
 
         return rtn;
